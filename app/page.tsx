@@ -38,7 +38,7 @@ export default function Home() {
         {/* Left Content */}
         <div className="flex flex-col gap-8 z-10">
           <div className="inline-flex items-center gap-2 bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full border border-orange-100 self-start shadow-sm">
-            <span className="text-accent-coral">✨</span>
+            <span className="text-accent-coral">❤️</span>
             <span className="text-[14px] font-medium text-accent-coral">Hand-painted with love</span>
           </div>
 
@@ -63,28 +63,23 @@ export default function Home() {
         </div>
 
         {/* Right Image Container */}
-        <div className="relative flex justify-center lg:justify-end">
-          {/* Decorative Yellow Circle */}
-          <div className="absolute top-[5%] right-[5%] w-48 h-48 bg-[#FFE259] rounded-full z-0 translate-x-4 -translate-y-4" />
-
-          <div className="relative z-10 p-8 md:p-12 bg-white rounded-[3.5rem] shadow-[0_32px_64px_-16px_rgba(62,50,42,0.12)] max-w-lg overflow-hidden">
-            <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden">
-              <Image
-                src="/hero-image.png"
-                alt="Wooden Train Set"
-                fill
-                className="object-cover"
-              />
-
-              {/* Station Tag Overlay */}
-              <div className="absolute top-1/4 left-0 bg-[#E84E4E] text-white px-4 py-1.5 -rotate-2 text-[10px] font-bold tracking-widest uppercase shadow-xl">
-                • Future Station •
-              </div>
-            </div>
+        <div className="relative flex justify-center lg:justify-end h-[550px] w-full lg:w-auto mt-10">
+          {/* Decorative Stacked Images */}
+          {/* Card 1 (Back) */}
+          <div className="absolute top-0 right-[35%] w-[320px] md:w-[380px] aspect-[4/5] z-0 rotate-[-12deg] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12)] rounded-[3rem] overflow-hidden border-[10px] border-white origin-bottom-right">
+            <Image src="/im1.png" alt="Decorative Wooden Item 1" fill className="object-cover" />
+          </div>
+          {/* Card 2 (Middle) */}
+          <div className="absolute top-[5%] right-[-2%] w-[330px] md:w-[390px] aspect-[4/5] z-10 rotate-[10deg] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] rounded-[3rem] overflow-hidden border-[10px] border-white origin-bottom-left">
+            <Image src="/im2.png" alt="Decorative Wooden Item 2" fill className="object-cover" />
+          </div>
+          {/* Card 3 (Front) */}
+          <div className="absolute top-[12%] right-[15%] w-[350px] md:w-[410px] aspect-[4/5] z-20 rotate-[-4deg] shadow-[0_50px_100px_-25px_rgba(0,0,0,0.25)] rounded-[3rem] overflow-hidden border-[10px] border-white">
+            <Image src="/im3.png" alt="Decorative Wooden Item 3" fill className="object-cover" />
           </div>
 
           {/* Hero Soft Blurs */}
-          <div className="absolute -bottom-10 -left-10 w-64 h-64 hero-gradient-orange opacity-40 -z-10" />
+          <div className="absolute -bottom-20 -left-20 w-80 h-80 hero-gradient-orange opacity-30 -z-10" />
         </div>
       </main>
 
