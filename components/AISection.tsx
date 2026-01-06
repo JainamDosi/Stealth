@@ -20,127 +20,116 @@ export default function AISection() {
                 setTimeout(() => {
                     setIsUploading(false);
                     setIsConverted(true);
-                }, 3000);
+                }, 2000);
             };
             reader.readAsDataURL(file);
         }
     };
 
     return (
-        <section className="relative py-24 px-8 bg-[#F9F7F2]">
-            <div className="max-w-7xl mx-auto">
-                <div className="text-center space-y-4 mb-16">
-                    <div className="inline-flex items-center gap-2 bg-accent-coral/10 px-4 py-2 rounded-full">
-                        <span className="text-accent-coral text-sm font-bold uppercase tracking-wider">AI Magic ✨</span>
+        <section className="relative py-16 md:py-24 px-4 md:px-8 bg-[#F9F7F2] overflow-hidden">
+            <div className="absolute inset-0 dot-grid opacity-[0.25] pointer-events-none"></div>
+
+            {/* Subtle light background watermark */}
+            <div className="absolute top-1/4 -left-20 w-80 h-80 opacity-[0.02] pointer-events-none rotate-[15deg]">
+                <Image src="/overlay.png" alt="Watermark" fill className="object-contain" />
+            </div>
+
+            <div className="max-w-6xl mx-auto relative z-10">
+                <div className="text-center space-y-4 mb-12 md:mb-16 reveal">
+                    <div className="inline-flex items-center gap-2 bg-accent-coral/10 px-4 py-1.5 rounded-full border border-accent-coral/20">
+                        <span className="text-accent-coral text-[10px] md:text-xs font-black uppercase tracking-[0.2em]">AI Magic ✨</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-semibold text-foreground tracking-tight">
-                        See yourself as a <span className="text-accent-coral">Wooden Toy</span>
+                    <h2 className="text-3xl md:text-5xl font-bold text-foreground tracking-tight text-balance">
+                        See yourself as a <span className="text-accent-coral italic">Wooden Toy</span>
                     </h2>
-                    <p className="text-lg text-text-muted max-w-2xl mx-auto">
-                        Upload a photo of yourself, a friend, or a pet, and our AI will visualize it as a handcrafted wooden companion.
+                    <p className="text-base md:text-lg text-text-muted max-w-xl mx-auto px-4 reveal-delay-1">
+                        Visualize anyone as a handcrafted wooden companion.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch max-w-4xl mx-auto">
                     {/* Upload Panel */}
-                    <div className="bg-white rounded-[3rem] p-10 shadow-xl border border-primary-brown/5 flex flex-col">
-                        <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
-                            <span className="w-8 h-8 rounded-full bg-primary-brown text-white flex items-center justify-center text-sm">1</span>
-                            Upload your photo
-                        </h3>
+                    <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-10 shadow-lg border border-primary-brown/5 flex flex-col reveal-delay-2">
+                        <div className="flex items-center justify-between mb-6">
+                            <h3 className="text-xl md:text-2xl font-bold flex items-center gap-3">
+                                <span className="w-8 h-8 rounded-full bg-primary-brown text-white flex items-center justify-center text-sm font-bold">1</span>
+                                Photo
+                            </h3>
+                            {preview && (
+                                <button
+                                    onClick={() => { setPreview(null); setIsConverted(false); }}
+                                    className="text-xs font-bold text-accent-coral"
+                                >
+                                    Reset
+                                </button>
+                            )}
+                        </div>
 
                         <div
                             onClick={() => fileInputRef.current?.click()}
-                            className={`flex-1 border-2 border-dashed rounded-[2rem] border-primary-brown/10 hover:border-accent-coral/40 transition-all cursor-pointer flex flex-col items-center justify-center p-12 text-center group ${preview ? 'bg-zinc-50' : 'bg-transparent'}`}
+                            className={`flex-1 min-h-[200px] md:min-h-[250px] border-2 border-dashed rounded-[1.5rem] md:rounded-[2rem] transition-all cursor-pointer flex flex-col items-center justify-center p-4 text-center group ${preview ? 'border-primary-brown/15' : 'border-primary-brown/10 hover:border-accent-coral/40'}`}
                         >
                             {preview ? (
-                                <div className="relative w-full h-full min-h-[300px] rounded-2xl overflow-hidden">
+                                <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-sm">
                                     <Image src={preview} alt="Upload preview" fill className="object-cover" />
-                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold">
-                                        Change Photo
-                                    </div>
                                 </div>
                             ) : (
-                                <>
-                                    <div className="w-20 h-20 rounded-full bg-accent-coral/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                        <svg className="w-10 h-10 text-accent-coral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div className="space-y-4">
+                                    <div className="w-14 h-14 rounded-full bg-accent-coral/5 flex items-center justify-center mx-auto group-hover:scale-105 transition-transform">
+                                        <svg className="w-6 h-6 text-accent-coral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                                         </svg>
                                     </div>
-                                    <p className="text-lg font-medium text-foreground mb-2">Drop your image here</p>
-                                    <p className="text-sm text-text-muted">Supports JPG, PNG (Max 5MB)</p>
-                                </>
+                                    <p className="text-base font-bold text-foreground">Tap to upload</p>
+                                </div>
                             )}
-                            <input
-                                type="file"
-                                ref={fileInputRef}
-                                onChange={handleUpload}
-                                className="hidden"
-                                accept="image/*"
-                            />
+                            <input type="file" ref={fileInputRef} onChange={handleUpload} className="hidden" accept="image/*" />
                         </div>
                     </div>
 
                     {/* Results Panel */}
-                    <div className="bg-primary-brown text-white rounded-[3rem] p-10 shadow-2xl flex flex-col relative overflow-hidden">
-                        {/* Decorative Background Pattern */}
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-accent-coral/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+                    <div className="bg-primary-brown text-white rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-10 shadow-xl flex flex-col relative overflow-hidden reveal-delay-3">
+                        {/* Branded Watermark Overlay - Orientation adjusted for better "stamped" feel */}
+                        <div className="absolute -bottom-12 -right-12 w-80 h-80 opacity-[0.12] pointer-events-none rotate-[-15deg] scale-110">
+                            <Image src="/overlay.png" alt="Watermark" fill className="object-contain" />
+                        </div>
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-accent-coral/15 rounded-full blur-[80px] -mr-32 -mt-32"></div>
 
-                        <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2 relative z-10">
-                            <span className="w-8 h-8 rounded-full bg-accent-coral text-white flex items-center justify-center text-sm">2</span>
-                            Your Toy Preview
+                        <h3 className="text-xl md:text-2xl font-bold mb-6 flex items-center gap-3 relative z-10">
+                            <span className="w-8 h-8 rounded-full bg-accent-coral text-white flex items-center justify-center text-sm font-bold">2</span>
+                            Result
                         </h3>
 
-                        <div className="flex-1 bg-white/5 rounded-[2rem] border border-white/10 backdrop-blur-sm flex flex-col items-center justify-center p-8 relative z-10">
+                        <div className="flex-1 bg-white/5 rounded-[1.5rem] md:rounded-[2rem] border border-white/10 backdrop-blur-sm flex flex-col items-center justify-center p-6 relative z-10 min-h-[250px]">
                             {isUploading ? (
-                                <div className="text-center space-y-6">
-                                    <div className="relative w-24 h-24 mx-auto">
-                                        <div className="absolute inset-0 border-4 border-white/20 rounded-full"></div>
-                                        <div className="absolute inset-0 border-4 border-accent-coral rounded-full border-t-transparent animate-spin"></div>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <p className="text-xl font-bold animate-pulse">Carving your soul into wood...</p>
-                                        <p className="text-sm text-white/60">AI is analyzing features & styling</p>
-                                    </div>
+                                <div className="text-center space-y-4">
+                                    <div className="w-12 h-12 md:w-16 md:h-16 border-4 border-accent-coral border-t-transparent rounded-full animate-spin mx-auto"></div>
+                                    <p className="text-lg font-bold italic animate-pulse">Carving...</p>
                                 </div>
                             ) : isConverted ? (
-                                <div className="space-y-8 w-full text-center">
-                                    <div className="relative w-full aspect-square max-w-[320px] mx-auto group">
-                                        {/* This would be the AI generated wood toy version */}
-                                        <div className="absolute inset-0 bg-gradient-to-br from-amber-200/20 to-orange-500/20 rounded-full blur-2xl animate-pulse"></div>
-                                        <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden border-4 border-white/20 shadow-2xl">
-                                            <Image
-                                                src="/im3.png" // Using existing asset as "converted" result for demo
-                                                alt="AI Result"
-                                                fill
-                                                className="object-cover scale-110 hover:scale-125 transition-transform duration-700"
-                                            />
+                                <div className="space-y-6 w-full text-center">
+                                    <div className="relative w-full aspect-square max-w-[200px] md:max-w-[240px] mx-auto">
+                                        <div className="absolute inset-0 bg-accent-coral/20 rounded-full blur-[30px] animate-pulse"></div>
+                                        <div className="relative w-full h-full rounded-[1.5rem] md:rounded-[2rem] overflow-hidden border-4 border-white/10 shadow-xl">
+                                            <Image src="/im3.png" alt="AI Result" fill className="object-cover" />
                                         </div>
                                     </div>
-                                    <div className="space-y-4">
-                                        <div className="inline-block px-4 py-1 bg-accent-coral rounded-full text-[10px] font-black uppercase tracking-widest text-white shadow-lg">
-                                            Match Score: 98%
-                                        </div>
-                                        <h4 className="text-2xl font-bold">Your Companion is Ready!</h4>
-                                        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                                            <button className="bg-white text-primary-brown px-8 py-3 rounded-full font-bold hover:bg-zinc-100 transition-all shadow-xl">
-                                                Order This Custom Gift — $129
-                                            </button>
-                                            <button
-                                                onClick={() => { setPreview(null); setIsConverted(false); }}
-                                                className="bg-transparent border border-white/30 text-white px-8 py-3 rounded-full font-medium hover:bg-white/10 transition-all"
-                                            >
-                                                Try Another
-                                            </button>
-                                        </div>
+                                    <div className="flex flex-col gap-3">
+                                        <button className="bg-white text-primary-brown px-8 py-3 rounded-full font-bold text-base hover:shadow-lg transition-all active:scale-95">
+                                            Order Now — $129
+                                        </button>
+                                        <button onClick={() => { setPreview(null); setIsConverted(false); }} className="text-sm font-bold text-white/50 hover:text-white">
+                                            Try Again
+                                        </button>
                                     </div>
                                 </div>
                             ) : (
-                                <div className="text-center max-w-xs space-y-4 opacity-40">
-                                    <div className="w-24 h-24 mx-auto mb-4 grayscale brightness-200 opacity-20">
-                                        <Image src="/wooden-logo.svg" alt="Toy" width={96} height={96} />
+                                <div className="text-center max-w-xs space-y-4 opacity-20">
+                                    <div className="w-16 h-16 md:w-20 md:h-20 mx-auto grayscale brightness-[4]">
+                                        <Image src="/wooden-logo.svg" alt="Toy Placeholder" width={80} height={80} />
                                     </div>
-                                    <p className="text-lg font-medium">Upload a photo to see the conversion</p>
+                                    <p className="text-sm font-bold uppercase tracking-widest">Awaiting Creation</p>
                                 </div>
                             )}
                         </div>
