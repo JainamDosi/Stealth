@@ -1,26 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FFFDF9;
+  --foreground: #3E322A;
+  --primary-brown: #4A3B31;
+  --accent-coral: #FF9E7F;
+  --text-muted: #8B7E74;
+  --font-outfit: 'Outfit', sans-serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary-brown: var(--primary-brown);
+  --color-accent-coral: var(--accent-coral);
+  --color-text-muted: var(--text-muted);
+  --font-outfit: var(--font-outfit);
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-outfit);
+  overflow-x: hidden;
+}
+
+/* Dot Grid Background */
+.dot-grid {
+  background-image: radial-gradient(#E5E0D8 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* Glass Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Custom Utilities */
+.text-balance {
+  text-wrap: balance;
+}
+
+.hero-gradient-orange {
+  background: radial-gradient(circle at center, rgba(255, 158, 127, 0.15) 0%, transparent 70%);
+  filter: blur(60px);
+}
+
+.hero-gradient-yellow {
+  background: radial-gradient(circle at center, rgba(255, 226, 89, 0.3) 0%, transparent 70%);
+  filter: blur(40px);
 }
