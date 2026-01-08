@@ -42,7 +42,7 @@ export default function Footer() {
                         <div className="relative w-32 h-32 md:w-52 md:h-52 group animate-float border-white">
                             <div className="absolute inset-0 bg-accent-coral/10 rounded-full blur-[40px] group-hover:bg-accent-coral/20 transition-all duration-1000"></div>
                             <Image
-                                src="/wooden-logo.svg"
+                                src="/main.png"
                                 alt="Footer Logo"
                                 fill
                                 className="object-contain drop-shadow-xl group-hover:scale-105 transition-transform duration-1000"

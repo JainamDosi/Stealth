@@ -7,22 +7,55 @@ export default function AISection() {
     const [isUploading, setIsUploading] = useState(false);
     const [preview, setPreview] = useState<string | null>(null);
     const [isConverted, setIsConverted] = useState(false);
+    const [generatedImage, setGeneratedImage] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const uploadedFileRef = useRef<File | null>(null);
 
     const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
-            setIsUploading(true);
+            uploadedFileRef.current = file;
             const reader = new FileReader();
             reader.onloadend = () => {
                 setPreview(reader.result as string);
-                // Simulate AI Conversion process
-                setTimeout(() => {
-                    setIsUploading(false);
-                    setIsConverted(true);
-                }, 2000);
+                setError(null);
+                if (isUploading) return;
+                // Auto-generate the wooden toy version
+                generateWoodenToy(file);
             };
             reader.readAsDataURL(file);
+        }
+    };
+
+    const generateWoodenToy = async (file: File) => {
+        setIsUploading(true);
+        setError(null);
+
+        try {
+            const formData = new FormData();
+            formData.append('image', file);
+
+            const response = await fetch('/api/generate-wooden-toy', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to generate wooden toy image');
+            }
+
+            // Convert base64 to data URL
+            const imageDataUrl = `data:${data.mimeType};base64,${data.image}`;
+            setGeneratedImage(imageDataUrl);
+            setIsConverted(true);
+        } catch (err) {
+            console.error('Error generating wooden toy:', err);
+            setError(err instanceof Error ? err.message : 'Failed to generate image');
+        } finally {
+            setIsUploading(false);
         }
     };
 
@@ -105,29 +138,52 @@ export default function AISection() {
                             {isUploading ? (
                                 <div className="text-center space-y-4">
                                     <div className="w-12 h-12 md:w-16 md:h-16 border-4 border-accent-coral border-t-transparent rounded-full animate-spin mx-auto"></div>
-                                    <p className="text-lg font-bold italic animate-pulse">Carving...</p>
+                                    <p className="text-lg font-bold italic animate-pulse">Carving your wooden toy...</p>
+                                    <p className="text-xs text-white/50">This may take 10-30 seconds</p>
                                 </div>
-                            ) : isConverted ? (
+                            ) : error ? (
+                                <div className="text-center space-y-4">
+                                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-red-500/20 flex items-center justify-center mx-auto">
+                                        <svg className="w-6 h-6 text-red-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </div>
+                                    <p className="text-sm font-bold text-red-200">{error}</p>
+                                    <button
+                                        onClick={() => uploadedFileRef.current && generateWoodenToy(uploadedFileRef.current)}
+                                        className="text-sm font-bold text-white/70 hover:text-white underline"
+                                    >
+                                        Try Again
+                                    </button>
+                                </div>
+                            ) : isConverted && generatedImage ? (
                                 <div className="space-y-6 w-full text-center">
                                     <div className="relative w-full aspect-square max-w-[200px] md:max-w-[240px] mx-auto">
                                         <div className="absolute inset-0 bg-accent-coral/20 rounded-full blur-[30px] animate-pulse"></div>
                                         <div className="relative w-full h-full rounded-[1.5rem] md:rounded-[2rem] overflow-hidden border-4 border-white/10 shadow-xl">
-                                            <Image src="/im3.png" alt="AI Result" fill className="object-cover" />
+                                            <Image src={generatedImage} alt="AI Generated Wooden Toy" fill className="object-cover" />
                                         </div>
                                     </div>
                                     <div className="flex flex-col gap-3">
-                                        <button className="bg-white text-primary-brown px-8 py-3 rounded-full font-bold text-base hover:shadow-lg transition-all active:scale-95">
-                                            Order Now — $129
+                                        <a
+                                            href={generatedImage}
+                                            download="wooden-toy.png"
+                                            className="bg-white text-primary-brown px-8 py-3 rounded-full font-bold text-base hover:shadow-lg transition-all active:scale-95"
+                                        >
+                                            Download Image
+                                        </a>
+                                        <button className="bg-accent-coral text-white px-8 py-3 rounded-full font-bold text-base hover:shadow-lg transition-all active:scale-95">
+                                            Order Physical Toy — $129
                                         </button>
-                                        <button onClick={() => { setPreview(null); setIsConverted(false); }} className="text-sm font-bold text-white/50 hover:text-white">
-                                            Try Again
+                                        <button onClick={() => { setPreview(null); setIsConverted(false); setGeneratedImage(null); setError(null); }} className="text-sm font-bold text-white/50 hover:text-white">
+                                            Try Another Photo
                                         </button>
                                     </div>
                                 </div>
                             ) : (
                                 <div className="text-center max-w-xs space-y-4 opacity-20">
                                     <div className="w-16 h-16 md:w-20 md:h-20 mx-auto grayscale brightness-[4]">
-                                        <Image src="/wooden-logo.svg" alt="Toy Placeholder" width={80} height={80} />
+                                        <Image src="/main.png" alt="Toy Placeholder" width={80} height={80} />
                                     </div>
                                     <p className="text-sm font-bold uppercase tracking-widest">Awaiting Creation</p>
                                 </div>

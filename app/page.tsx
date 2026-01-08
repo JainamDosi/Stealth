@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProductShowcase from "@/components/ProductShowcase";
 import FeaturesSection from "@/components/FeaturesSection";
-import AISection from "@/components/AISection";
+import CollectionSection from "@/components/CollectionSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import DiagonalRibbon from "@/components/DiagonalRibbon";
 import PricingSection from "@/components/PricingSection";
@@ -19,7 +19,7 @@ export default function Home() {
       <div className="relative z-0">
         <ProductShowcase />
         <FeaturesSection />
-        <AISection />
+        <CollectionSection />
         <TestimonialsSection />
         <DiagonalRibbon />
         <PricingSection />

@@ -43,7 +43,7 @@ export default function Navbar() {
                     <div className="flex items-center gap-2 group cursor-pointer relative z-[120]">
                         <div className={`relative transition-all duration-500 ${scrolled ? "w-5 h-5 md:w-6 md:h-6" : "w-6 h-6 md:w-7 md:h-7"}`}>
                             <Image
-                                src="/wooden-logo.svg"
+                                src="/main.png"
                                 alt="Woooden Logo"
                                 fill
                                 className="object-contain"
