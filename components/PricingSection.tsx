@@ -4,7 +4,7 @@ const pricingPlans = [
     {
         name: "Single Figure",
         description: "Perfect for trying us out",
-        price: "$24",
+        price: "$__",
         period: "/ piece",
         emoji: "💛",
         bgColor: "bg-white",
@@ -16,7 +16,7 @@ const pricingPlans = [
     {
         name: "Collection Set",
         description: "Best value for collectors",
-        price: "$65",
+        price: "$__",
         period: "/ 3 pieces",
         emoji: "✨",
         bgColor: "bg-gradient-to-br from-[#8B7E74] to-primary-brown",
@@ -28,7 +28,7 @@ const pricingPlans = [
     {
         name: "Custom Order",
         description: "Personalized just for you",
-        price: "$99",
+        price: "$__",
         period: "/ custom",
         emoji: "🎁",
         bgColor: "bg-white",
