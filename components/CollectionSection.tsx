@@ -66,7 +66,7 @@ function Header() {
                     The Art of Wood
                 </span>
                 <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold text-foreground tracking-tighter leading-[0.9]">
-                    Heritage <span className="text-accent-coral italic serif">Collection</span>
+                    <span className="text-accent-coral italic serif">Collection</span>
                 </h2>
                 <p className="text-base md:text-xl text-text-muted max-w-2xl mx-auto font-medium">
                     A carefully curated showcase of unique pieces, each telling a story of craftsmanship and heritage.

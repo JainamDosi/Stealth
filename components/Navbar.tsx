@@ -69,7 +69,7 @@ export default function Navbar() {
                     <div className="flex items-center gap-2 md:gap-4 relative z-[120]">
                         <button className={`bg-primary-brown text-white rounded-full font-bold tracking-[0.1em] uppercase transition-all duration-500 text-[10px] md:text-[11px]
                             ${scrolled ? "px-4 py-2" : "px-6 py-3"}`}>
-                            Commission
+                            Get Now
                         </button>
 
                         {/* Hamburger Button */}

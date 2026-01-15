@@ -9,8 +9,8 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Woooden Stories | Handcrafted Wooden Companions",
-  description: "Experience the magic of handcrafted wooden figures. Sustainable, eco-friendly, and designed to inspire your workspace.",
+  title: "Woooden Stories ",
+  description: "",
 };
 
 export default function RootLayout({
