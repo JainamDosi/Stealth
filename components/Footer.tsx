@@ -9,48 +9,7 @@ export default function Footer() {
             <div className="absolute inset-0 dot-grid opacity-[0.2] pointer-events-none"></div>
 
             {/* Immersive CTA Section */}
-            <div className="max-w-5xl mx-auto px-6 md:px-8 mb-12 md:mb-16 relative z-10">
-                <div className="relative bg-primary-brown rounded-[2rem] md:rounded-[3rem] p-8 md:p-14 overflow-hidden shadow-xl reveal border border-white/5">
-                    {/* Branded Watermark Overlay */}
-                    <div className="absolute top-[-10%] left-[-10%] w-[400px] h-[400px] opacity-[0.08] pointer-events-none rotate-[20deg] scale-125">
-                        <Image src="/overlay.png" alt="Watermark" fill className="object-contain" />
-                    </div>
 
-                    {/* Decorative Elements */}
-                    <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-accent-coral/15 rounded-full blur-[80px] -mr-32 -mt-32 animate-pulse"></div>
-                    <div className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-white/5 rounded-full blur-[60px] -ml-20 -mb-20"></div>
-
-                    <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10 text-center lg:text-left">
-                        <div className="space-y-5 md:space-y-6 max-w-lg">
-                            <h2 className="text-3xl md:text-5xl font-bold text-white leading-[1.1] tracking-tight">
-                                Ready for a <br />
-                                <span className="text-accent-coral italic underline decoration-white/10 underline-offset-[6px]">new friend?</span>
-                            </h2>
-                            <p className="text-base text-white/60 leading-relaxed font-medium">
-                                Join our community of 2,400+ humans who have brought home a piece of Woooden Stories.
-                            </p>
-                            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2">
-                                <button className="bg-white text-primary-brown px-8 py-3.5 rounded-full font-bold text-base hover:shadow-lg transition-all active:scale-95">
-                                    Start Collection
-                                </button>
-                                <button className="bg-transparent border border-white/20 text-white px-8 py-3.5 rounded-full font-bold text-base hover:bg-white/10 transition-all active:scale-95">
-                                    View FAQ
-                                </button>
-                            </div>
-                        </div>
-
-                        <div className="relative w-32 h-32 md:w-52 md:h-52 group animate-float border-white">
-                            <div className="absolute inset-0 bg-accent-coral/10 rounded-full blur-[40px] group-hover:bg-accent-coral/20 transition-all duration-1000"></div>
-                            <Image
-                                src="/main.png"
-                                alt="Footer Logo"
-                                fill
-                                className="object-contain drop-shadow-xl group-hover:scale-105 transition-transform duration-1000"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             {/* Main Footer Links */}
             <div className="max-w-5xl mx-auto px-6 md:px-8 relative z-10">
